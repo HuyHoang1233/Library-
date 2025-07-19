@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.io.Serializable;
 
 /**
  *
  * @author Huy Hoàng
  */
-public class Reader {
+public class Reader implements Serializable {
 	private String idReader;
 	private String nameReader;
 	private String type;
