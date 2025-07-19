@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
+import java.io.Serializable;
 /**
  *
  * @author Huy Hoàng
  */
-public class Librarian {
+public class Librarian implements Serializable {
 	private String nameUser;
 	private String password;
 	public String getNameUser() {
