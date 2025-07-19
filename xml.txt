@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="LibraryManagement" default="jar" basedir=".">
+    
+    <!-- Cấu hình biến -->
+    <property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.dir"    value="dist"/>
+    <property name="jar.name"    value="LibraryApp.jar"/>
+
+    <!-- Tạo thư mục build -->
+    <target name="init">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile code Java -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+    </target>
+
+    <!-- Tạo file JAR -->
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.dir}/${jar.name}" basedir="${classes.dir}">
+            <manifest>
+                <!-- Ghi đúng tên class chứa hàm main -->
+                <attribute name="Main-Class" value="controller.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Xóa thư mục build cũ -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+</project>
