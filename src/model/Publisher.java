@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.io.Serializable;
 
 /**
  *
  * @author Huy Hoàng
  */
-public class Publisher {
+public class Publisher implements Serializable {
 	private String name;
 	private String address;
 	public String getName() {
