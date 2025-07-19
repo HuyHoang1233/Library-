@@ -35,7 +35,7 @@ public class LibraryController {
         if (books.isEmpty()) {
             System.out.println("No books in the system.");
         } else {
-            System.out.println("Danh sách sách hiện có:");
+            System.out.println("Danh sach hien co:");
             for (Book b : books) {
                 System.out.println(b);
             }
