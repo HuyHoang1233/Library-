@@ -13,6 +13,7 @@ import java.util.Scanner;
 import model.Book;
 import model.Reader;
 
+
 public class LibraryView {
     private final Scanner sc = new Scanner(System.in);
 
@@ -26,6 +27,8 @@ public class LibraryView {
         System.out.println("6. View all authors");      // <== thêm dòng này
         System.out.println("7. Add new reader"); //them
         System.out.println("8. View all readers");//them
+        System.out.println("9. Add new publisher");//them
+        System.out.println("10. View all publishers");//them
         System.out.println("0. Exit");
         System.out.print("Your choice: ");
     }
@@ -137,6 +140,29 @@ public void displayBorrows(List<Borrow> borrows) {
     String sex = sc.nextLine();
     
     return new Reader(username, password, idReader, type, sex);
+}
+    public void inputPublisher() {
+    System.out.println("Enter Publisher ID: ");
+    String id = sc.nextLine();
+    System.out.println("Enter Publisher Name: ");
+    String name = sc.nextLine();
+    System.out.println("Enter Publisher Address: ");
+    String address = sc.nextLine();
+
+    Publisher p = new Publisher(id, name, address);
+    
+    System.out.println("Publisher added successfully!");
+}
+
+public void viewAllPublishers() {
+    List<Publisher> list = controller.getAllPublishers();
+    if (list.isEmpty()) {
+        System.out.println("No publishers found.");
+    } else {
+        for (Publisher p : list) {
+            System.out.println(p);
+        }
+    }
 }
 }
 
