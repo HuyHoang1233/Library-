@@ -28,14 +28,13 @@ public class FileUtils {
     public static <T> List<T> readFromFile(String filename) {
         File file = new File(filename);
         if (!file.exists()) {
-            System.out.println("FIle khong ton tai: " + filename + ". Tra ve danh sach rong.");
+            System.out.println("File khong ton tai: " + filename + ". Tra ve danh sach rong.");
             return new ArrayList<>();
         }
-
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             return (List<T>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println(" Loi doc file " + filename + ": " + e.getMessage());
+            System.err.println("Loi doc file " + filename + ": " + e.getMessage());
             return new ArrayList<>();
         }
     }
