@@ -17,7 +17,6 @@ public abstract class User {
     public boolean checkLogin(String u, String p) {
         return this.username.equals(u) && this.password.equals(p);
     }
-    public abstract void showMenu();
 
     public String getUsername() {
         return username;
