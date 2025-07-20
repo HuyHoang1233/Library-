@@ -3,12 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.io.Serializable;
 
 /**
  *
  * @author Huy Hoàng
  */
-public class Book {
+public class Book implements Serializable {
+    
+        private static final long serialVersionUID = 1L; // ✅ Thêm để đảm bảo tương thích khi ghi/đọc file
+
 	private String idBook;
 	private String nameBook;
 	private int price;
