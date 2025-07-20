@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.io.Serializable;
 
 /**
  *
  * @author Huy Hoàng
  */
-public class Author {
+public class Author implements Serializable {
+        private static final long serialVersionUID = 1L;
+
 	private String name;
 	private String workplace;
 	public String getName() {
@@ -33,6 +36,7 @@ public class Author {
 	}
 
 	public boolean equals(Object obj) {
+            
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -56,5 +60,6 @@ public class Author {
 	public String toString() {
 		return "Author [name=" + name + ", workplace=" + workplace + "]";
 	}
+        
 
 }
