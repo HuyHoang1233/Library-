@@ -1,4 +1,6 @@
 // User.java
+
+
 package model;
 
 public abstract class User {
@@ -10,9 +12,10 @@ public abstract class User {
         this.password = password;
     }
 
-    public boolean authenticate(String inputUser, String inputPass) {
-        return this.username.equals(inputUser) && this.password.equals(inputPass);
-    }
-
     public abstract void showMenu();
+
+    public boolean checkLogin(String u, String p) {
+        return this.username.equals(u) && this.password.equals(p);
+    }
 }
+
