@@ -4,14 +4,34 @@
  */
 package model;
 import java.io.Serializable;
-
+import java.util.Objects;
 /**
  *
  * @author Huy Hoàng
  */
 public class Publisher implements Serializable {
+        private static final long serialVersionUID = 1L;
+        
+        private String publisherId;
 	private String name;
 	private String address;
+        
+        public Publisher(String publisherId, String name, String address) {
+        if (publisherId == null || publisherId.isEmpty()) {
+            throw new IllegalArgumentException("Publisher ID cannot be empty!");
+        }
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Publisher name cannot be empty!");
+        }
+        if (address == null || address.isEmpty()) {
+            throw new IllegalArgumentException("Publisher address cannot be empty!");
+        }
+
+        this.publisherId = publisherId;
+        this.name = name;
+        this.address = address;
+    }
+        
 	public String getName() {
 		return name;
 	}
