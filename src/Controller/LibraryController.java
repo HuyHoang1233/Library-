@@ -1,22 +1,33 @@
 package Controller;
 
 import View.LibraryView;
-import java.util.*;
 import model.*;
 
+import java.util.*;
 
 public class LibraryController {
-    
-    private LibraryView view = new LibraryView();
-    private List<Book> books = new ArrayList<>();
-    private List<Borrow> borrows = new ArrayList<>();
-    private List<Reader> readerList = new ArrayList<>();
-    private List<Publisher> publisherList = new ArrayList<>();
-    
+    private final LibraryView view = new LibraryView();
+
+    private final List<Book> books = new ArrayList<>();
+    private final List<Borrow> borrows = new ArrayList<>();
+   private final List<model.Reader> readerList = new ArrayList<>();
+
+    private List<Author> authorList;
+
+    public LibraryController() {
+        loadAuthors(); // load authors from file
+    }
+
+    // ======================== MAIN ========================
+    public static void main(String[] args) {
+        System.out.println("===== LIBRARY MANAGEMENT SYSTEM =====");
+        LibraryController controller = new LibraryController();
+        controller.run();
+    }
+
+    // ======================== MAIN MENU ========================
     public void run() {
-        Scanner sc = new Scanner(System.in);
         while (true) {
-            
             view.showMainMenu();
             int choice = view.getChoice();
             switch (choice) {
@@ -28,134 +39,103 @@ public class LibraryController {
                 case 6 -> viewAuthor();
                 case 7 -> addReader();
                 case 8 -> viewReader();
-                case 9 -> view.inputPublisher();
-                case 10 -> view.viewAllPublishers();  
                 case 0 -> {
                     System.out.println("Goodbye!");
                     return;
                 }
                 default -> System.out.println("Invalid choice!");
             }
-            
         }
     }
-    
-    
+
+    // ======================== BOOK ========================
     private void addBook() {
         Book b = view.inputBook();
         books.add(b);
         System.out.println("Book added successfully!");
     }
-    private void viewBorrows() {
-        view.displayBorrows(borrows);
-    }
-  
-    private void addBorrow() {
-        Borrow b = view.inputBorrow(); 
-     borrows.add(b);  
-        System.out.println("Borrow record added!");
-}
 
     private void viewBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in the system.");
         } else {
-            System.out.println("Danh sach hien co:");
+            System.out.println("Danh sách sách hiện có:");
             for (Book b : books) {
                 System.out.println(b);
             }
         }
     }
-    private void viewReader() {
-    if (readerList.isEmpty()) {
-        System.out.println("No readers found.");
-    } else {
-        for (Reader r : readerList) {
-            System.out.println(r);
+
+    // ======================== BORROW ========================
+    private void addBorrow() {
+        Borrow b = view.inputBorrow();
+        borrows.add(b);
+        System.out.println("Borrow record added!");
+    }
+
+    private void viewBorrows() {
+        if (borrows.isEmpty()) {
+            System.out.println("No borrow records.");
+        } else {
+            for (Borrow b : borrows) {
+                System.out.println(b);
+            }
         }
     }
-}
+
+    // ======================== READER ========================
     private void addReader() {
-    Reader reader = view.inputReader();
-    readerList.add(reader);
-    FileUtils.writeToFile("readers.dat", readerList); // Ghi lại file
-}
-    
-    public static void main(String[] args) {
-        System.out.println("===== LIBRARY MANAGEMENT SYSTEM =====");
-        LibraryController controller = new LibraryController();
-        controller.run();
-    }
-    
-    
-    private List<Author> authorList;
+        model.Reader reader = view.inputReader();
 
-    public LibraryController() {
-        loadAuthors(); // load từ file
-        loadPublishers();//them
+        readerList.add(reader);
+        FileUtils.writeToFile("readers.dat", readerList);
+        System.out.println("Reader added successfully!");
     }
 
-    public void loadAuthors() {
-    Object data = FileUtils.readFromFile("authors.dat");
-    if (data != null && data instanceof List<?>) {
-        authorList = (List<Author>) data;
-    } else {
-        authorList = new ArrayList<>();
-    }
-}
+    private void viewReader() {
+        if (readerList.isEmpty()) {
+            System.out.println("No readers found.");
+        } else {
+           for (model.Reader r : readerList) {
 
-    public void saveAuthors() {
+                System.out.println(r);
+            }
+        }
+    }
+
+    // ======================== AUTHOR ========================
+    private void loadAuthors() {
+        Object data = FileUtils.readFromFile("authors.dat");
+        if (data instanceof List<?>) {
+            authorList = (List<Author>) data;
+        } else {
+            authorList = new ArrayList<>();
+        }
+    }
+
+    private void saveAuthors() {
         FileUtils.writeToFile("authors.dat", authorList);
     }
 
-    public void addAuthor(Author author) {
+    private void addAuthor() {
+        Author author = view.inputAuthor();
         if (!authorList.contains(author)) {
             authorList.add(author);
-            saveAuthors(); // Ghi file ngay sau khi thêm
+            saveAuthors();
+            System.out.println("Author added successfully!");
+        } else {
+            System.out.println("Author already exists.");
         }
     }
 
-    public List<Author> getAuthorList() {
-        return authorList;
+    private void viewAuthor() {
+        if (authorList.isEmpty()) {
+            System.out.println("No authors available.");
+        } else {
+            System.out.println("--- Author List ---");
+            for (Author author : authorList) {
+                System.out.println(author);
+            }
+        }
     }
-    public void addAuthor() {
-    Author author = view.inputAuthor();
-    authorList.add(author);
-    FileUtils.writeToFile("authors.dat", authorList);
-    System.out.println("Author added successfully!");
-}
-
-public void viewAuthor() {
-    if (authorList.isEmpty()) {
-        System.out.println("No authors available.");
-        return;
-    }
-    System.out.println("--- Author List ---");
-    for (Author author : authorList) {
-        System.out.println(author);
-    }
-}
-public void loadPublishers() {
-    Object data = FileUtils.readFromFile("publishers.dat"); // ✅ ĐÃ SỬA Ở ĐÂY
-    if (data != null && data instanceof List<?>) {          // ✅ ĐÃ SỬA Ở ĐÂY
-        publisherList = (List<Publisher>) data;             // ✅ ĐÃ SỬA Ở ĐÂY
-    } else {
-        System.out.println("File not found or invalid. Returning empty list.");
-        publisherList = new ArrayList<>();
-    }
-}
-
-public void savePublishers() {
-    FileUtils.writeToFile("publishers.dat", publisherList);
-}
-
-public void addPublisher(Publisher p) {
-    publisherList.add(p);
-    savePublishers();
-}
-
-public List<Publisher> getAllPublishers() {
-    return publisherList;
-}
-
 }
