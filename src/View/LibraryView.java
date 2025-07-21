@@ -13,8 +13,8 @@ import java.util.Scanner;
 import model.Book;
 import model.Reader;
 
-
 public class LibraryView {
+
     private final Scanner sc = new Scanner(System.in);
 
     public void showMainMenu() {
@@ -29,19 +29,23 @@ public class LibraryView {
         System.out.println("8. View all readers");//them
         System.out.println("9. Add new publisher");//them
         System.out.println("10. View all publishers");//them
+        System.out.println("11. Add Librarian");
+        System.out.println("12. View All Librarians");
         System.out.println("0. Exit");
         System.out.print("Your choice: ");
     }
-public void displayBorrows(List<Borrow> borrows) {
-    if (borrows.isEmpty()) {
-        System.out.println("No borrow records found.");
-    } else {
-        System.out.println("--- Borrow List ---");
-        for (Borrow b : borrows) {
-            System.out.println(b);
+
+    public void displayBorrows(List<Borrow> borrows) {
+        if (borrows.isEmpty()) {
+            System.out.println("No borrow records found.");
+        } else {
+            System.out.println("--- Borrow List ---");
+            for (Borrow b : borrows) {
+                System.out.println(b);
+            }
         }
     }
-}
+
     public int getChoice() {
         try {
             return Integer.parseInt(sc.nextLine());
@@ -49,19 +53,17 @@ public void displayBorrows(List<Borrow> borrows) {
             return -1;
         }
     }
-    
+
     public void displayReaders(List<Reader> readers) {
-    if (readers.isEmpty()) {
-        System.out.println("No readers found.");
-    } else {
-        System.out.println("--- Reader List ---");
-        for (Reader r : readers) {
-            System.out.println(r);
+        if (readers.isEmpty()) {
+            System.out.println("No readers found.");
+        } else {
+            System.out.println("--- Reader List ---");
+            for (Reader r : readers) {
+                System.out.println(r);
+            }
         }
     }
-}
-    
-    
 
     public Book inputBook() {
         Book b = new Book();
@@ -85,84 +87,97 @@ public void displayBorrows(List<Borrow> borrows) {
 
         return b;
     }
+
     public Borrow inputBorrow() {
-    System.out.print("Enter Borrow ID: ");
-    String idBorrow = sc.nextLine();
+        System.out.print("Enter Borrow ID: ");
+        String idBorrow = sc.nextLine();
 
-    System.out.print("Enter Reader ID: ");
-    String idReader = sc.nextLine();
+        System.out.print("Enter Reader ID: ");
+        String idReader = sc.nextLine();
 
-    System.out.print("Enter Book ID: ");
-    String idBook = sc.nextLine();
-    
-    System.out.println("Enter Reader ID:"); {
-}
+        System.out.print("Enter Book ID: ");
+        String idBook = sc.nextLine();
 
-    Date lendDate = new Date(); // ngày mượn hiện tại
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(lendDate);
-    cal.add(Calendar.DAY_OF_MONTH, 7); // cộng 7 ngày làm ngày trả
-    Date dueDate = cal.getTime();
+        System.out.println("Enter Reader ID:");
+        {
+        }
 
-    String overtime = "No";
+        Date lendDate = new Date(); // ngày mượn hiện tại
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(lendDate);
+        cal.add(Calendar.DAY_OF_MONTH, 7); // cộng 7 ngày làm ngày trả
+        Date dueDate = cal.getTime();
 
-    // Giả sử bạn đã có constructor Borrow(String idReader, String idBook, Date lendDate, Date dueDate, String overtime)
-    return new Borrow(idReader, idBook, lendDate, dueDate, overtime);
-    
-}
-    
-    
+        String overtime = "No";
+
+        // Giả sử bạn đã có constructor Borrow(String idReader, String idBook, Date lendDate, Date dueDate, String overtime)
+        return new Borrow(idReader, idBook, lendDate, dueDate, overtime);
+
+    }
+
     public Author inputAuthor() {
-    Scanner sc = new Scanner(System.in);
-    System.out.print("Enter author name: ");
-    String name = sc.nextLine();
-    
-    System.out.print("Enter workplace: ");
-    String workplace = sc.nextLine();
-    
-    Author author = new Author();
-    author.setName(name);
-    author.setWorkplace(workplace);
-    
-    return author;
-}
-    
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter author name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter workplace: ");
+        String workplace = sc.nextLine();
+
+        Author author = new Author();
+        author.setName(name);
+        author.setWorkplace(workplace);
+
+        return author;
+    }
+
     public Reader inputReader() {
-    System.out.print("Enter Reader ID: ");
-    String idReader = sc.nextLine();
-    System.out.print("Enter Username: ");
-    String username = sc.nextLine();
-    System.out.print("Enter Password: ");
-    String password = sc.nextLine();
-    System.out.print("Enter Reader Type: ");
-    String type = sc.nextLine();
-    System.out.print("Enter Sex: ");
-    String sex = sc.nextLine();
-    
-    return new Reader(username, password, idReader, type, sex);
-}
+        System.out.print("Enter Reader ID: ");
+        String idReader = sc.nextLine();
+        System.out.print("Enter Username: ");
+        String username = sc.nextLine();
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+        System.out.print("Enter Reader Type: ");
+        String type = sc.nextLine();
+        System.out.print("Enter Sex: ");
+        String sex = sc.nextLine();
+
+        return new Reader(username, password, idReader, type, sex);
+    }
+
     public void inputPublisher() {
-    System.out.println("Enter Publisher ID: ");
-    String id = sc.nextLine();
-    System.out.println("Enter Publisher Name: ");
-    String name = sc.nextLine();
-    System.out.println("Enter Publisher Address: ");
-    String address = sc.nextLine();
+        System.out.println("Enter Publisher ID: ");
+        String id = sc.nextLine();
+        System.out.println("Enter Publisher Name: ");
+        String name = sc.nextLine();
+        System.out.println("Enter Publisher Address: ");
+        String address = sc.nextLine();
 
-    Publisher p = new Publisher(id, name, address);
-    
-    System.out.println("Publisher added successfully!");
-}
+        Publisher p = new Publisher(id, name, address);
 
-public void viewAllPublishers() {
-    List<Publisher> list = controller.getAllPublishers();
-    if (list.isEmpty()) {
-        System.out.println("No publishers found.");
-    } else {
-        for (Publisher p : list) {
-            System.out.println(p);
+        System.out.println("Publisher added successfully!");
+    }
+
+    public void viewAllPublishers() {
+        List<Publisher> list = controller.getAllPublishers();
+        if (list.isEmpty()) {
+            System.out.println("No publishers found.");
+        } else {
+            for (Publisher p : list) {
+                System.out.println(p);
+            }
         }
     }
+    
+    public Librarian inputLibrarian() {
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter ID: "); String id = sc.nextLine().trim();
+    System.out.print("Enter Name: "); String name = sc.nextLine().trim();
+    System.out.print("Enter Email: "); String email = sc.nextLine().trim();
+    System.out.print("Enter Username: "); String username = sc.nextLine().trim();
+    System.out.print("Enter Password: "); String password = sc.nextLine().trim();
+    System.out.print("Enter Role: "); String role = sc.nextLine().trim();
+    return new Librarian(id, name, email, username, password, role);
 }
+    
 }
-
